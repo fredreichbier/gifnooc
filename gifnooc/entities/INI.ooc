@@ -3,7 +3,7 @@ use oocini
 import text/StringTokenizer
 import io/[Reader, FileReader]
 
-import gifnooc/[Entity, Errors]
+import gifnooc/[Entity, Errors, Serialize]
 
 import oocini/INI
 
@@ -20,7 +20,7 @@ INIEntity: class extends Entity {
         section := tokens get(0)
         key := tokens get(1)
         if(ini hasOption(section, key)) {
-            return ini getOption(section, key, T, null as T)
+            return Registrar deserialize(T, ini getOption(section, key))
         } else if(hasParent()) {
             return parent getOption(path, T)
         } else {
