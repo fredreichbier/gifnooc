@@ -10,8 +10,7 @@ import oocini/INI
 INIEntity: class extends Entity {
     ini: INI
 
-    init: func (parent: Entity, filename: String) {
-        super(parent)
+    init: func ~withFileName (=parent, filename: String) {
         ini = INI new(filename)
     }
 
