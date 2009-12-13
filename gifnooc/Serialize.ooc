@@ -42,3 +42,6 @@ Registrar addEntry(Int, \
 Registrar addEntry(Bool, \
     func (value: Bool) -> String { value ? "yes" : "no" }, \
     func (value: String) -> Bool { value == "yes" })
+Registrar addEntry(String, \
+    func (value: String) -> String { value }, \
+    func (value: String) -> String { value })
