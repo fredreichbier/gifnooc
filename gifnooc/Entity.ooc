@@ -5,3 +5,8 @@ Entity: abstract class {
 
     getOption: abstract func <T> ~errorIfNotFound (path: String, T: Class) -> T
 }
+
+WriteableEntity: abstract class extends Entity {
+    setOption: abstract func <T> (path: String, value: T)
+    save: abstract func
+}
