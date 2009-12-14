@@ -19,7 +19,16 @@ INIEntity: class extends Entity {
         section := tokens get(0)
         key := tokens get(1)
         if(ini hasOption(section, key)) {
-            return Registrar deserialize(T, ini getOption(section, key))
+            s := ini getOption(section, key)
+            /* valid contents? return, deserialized.
+               invalid contents? ask parent. */
+            if(Registrar validateString(T, s)) {
+                return Registrar deserialize(T, s)
+            } else if(hasParent()) {
+                return parent getOption(path, T)
+            } else {
+                NoSuchOptionError new(This, "No valid contents for '%s' found." format(path)) throw()
+            }
         } else if(hasParent()) {
             return parent getOption(path, T)
         } else {

@@ -3,3 +3,9 @@ NoSuchOptionError: class extends Exception {
         super(msg)
     }
 }
+
+SerializationError: class extends Exception {
+    init: func ~withMsg (.msg) {
+        super(msg)
+    }
+}
