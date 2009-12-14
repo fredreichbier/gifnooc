@@ -27,6 +27,7 @@ INIEntity: class extends WriteableEntity {
 
     getOption: func <T> ~errorIfNotFound (path: String, T: Class) -> T {
         section, key: String
+        path = _getPath(path)
         _getOptionName(path, section&, key&)
         if(ini hasOption(section, key)) {
             s := ini getOption(section, key)
@@ -48,6 +49,7 @@ INIEntity: class extends WriteableEntity {
 
     setOption: func <T> (path: String, value: T) {
         section, key: String
+        path = _getPath(path)
         _getOptionName(path, section&, key&)
         if(Registrar validateValue(T, value)) {
             ini setOption(section, key, Registrar serialize(T, value))

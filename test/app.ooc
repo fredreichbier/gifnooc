@@ -14,11 +14,16 @@ setupConfig: func -> Entity {
 
 main: func {
     entity := setupConfig() as WriteableEntity
-    "verbose: %d" format(entity getOption("Options.verbose", Bool)) println()
-    "outfile: %s" format(entity getOption("Options.out", String)) println()
-    "name: %s" format(entity getOption("Data.name", String)) println()
-    "address: %s" format(entity getOption("Data.address", String)) println()
+    
+    entity setBasePath("Options")
+    "verbose: %d" format(entity getOption("verbose", Bool)) println()
+    "outfile: %s" format(entity getOption("out", String)) println()
 
+    entity setBasePath("Data")
+    "name: %s" format(entity getOption("name", String)) println()
+    "address: %s" format(entity getOption("address", String)) println()
+
+    entity setBasePath(null)
     counter := entity getOption("Fun.counter", Int)
     "counter: %d" format(counter) println()
     entity setOption("Fun.counter", counter + 1)
