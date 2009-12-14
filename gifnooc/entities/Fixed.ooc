@@ -13,10 +13,11 @@ FixedEntity: class extends Entity {
         values put(path, value as Pointer)
     }
 
-    getOption: func <T> ~errorIfNotFound (path: String, T: Class) -> T {
+    getOption: func <T> (path: String, T: Class, absolute: Bool) -> T {
+        path = _getPath(path, absolute)
         if(!values contains(path)) {
             if(hasParent()) {
-                return parent getOption(path, T)
+                return parent getOption(path, T, true)
             } else {
                 NoSuchOptionError new(This, "No such option: '%s'" format(path)) throw()
             }

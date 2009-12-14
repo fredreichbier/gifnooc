@@ -25,9 +25,9 @@ INIEntity: class extends WriteableEntity {
         }
     }
 
-    getOption: func <T> ~errorIfNotFound (path: String, T: Class) -> T {
+    getOption: func <T> (path: String, T: Class, absolute: Bool) -> T {
         section, key: String
-        path = _getPath(path)
+        path = _getPath(path, absolute)
         _getOptionName(path, section&, key&)
         if(ini hasOption(section, key)) {
             s := ini getOption(section, key)
@@ -36,7 +36,7 @@ INIEntity: class extends WriteableEntity {
             if(Registrar validateString(T, s)) {
                 return Registrar deserialize(T, s)
             } else if(hasParent()) {
-                return parent getOption(path, T)
+                return parent getOption(path, T, true)
             } else {
                 NoSuchOptionError new(This, "No valid contents for '%s' found." format(path)) throw()
             }
@@ -49,7 +49,7 @@ INIEntity: class extends WriteableEntity {
 
     setOption: func <T> (path: String, value: T) {
         section, key: String
-        path = _getPath(path)
+        path = _getPath(path, false)
         _getOptionName(path, section&, key&)
         if(Registrar validateValue(T, value)) {
             ini setOption(section, key, Registrar serialize(T, value))
