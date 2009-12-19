@@ -13,6 +13,18 @@ FixedEntity: class extends Entity {
         values put(path, value as Pointer)
     }
 
+    setValue: func <T> (path: String, value: T) {
+        addValue(path, value)
+    }
+
+    removeValue: func (path: String) {
+        values remove(path)
+    }
+
+    getValue: func <T> (path: String, T: Class) -> T {
+        values get(path) as T
+    }
+
     getOption: func <T> (path: String, T: Class, absolute: Bool) -> T {
         path = _getPath(path, absolute)
         if(!values contains(path)) {
