@@ -1,4 +1,5 @@
 import structs/HashMap
+import io/File
 
 import gifnooc/Errors
 
@@ -74,3 +75,9 @@ Registrar addEntry(String, \
     func (value: String) -> String { value },
     func (value: String) -> Bool { true },
     func (value: String) -> Bool { true })
+Registrar addEntry(File, \
+    func (value: File) -> String { value path }, \
+    func (value: String) -> File { File new(value) },
+    func (value: File) -> Bool { true },
+    func (value: String) -> Bool { true })
+

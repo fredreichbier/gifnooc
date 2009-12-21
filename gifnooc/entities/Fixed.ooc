@@ -3,14 +3,14 @@ import structs/HashMap
 import gifnooc/[Entity, Errors, Serialize]
 
 FixedEntity: class extends Entity {
-    values: HashMap<Pointer>
+    values: HashMap<String>
 
     init: func (=parent) {
-        values = HashMap<Pointer> new()
+        values = HashMap<String> new()
     }
 
     addValue: func <T> (path: String, value: T) {
-        values put(path, value as Pointer)
+        values put(path, Registrar serialize(T, value))
     }
 
     setValue: func <T> (path: String, value: T) {
@@ -22,7 +22,7 @@ FixedEntity: class extends Entity {
     }
 
     getValue: func <T> (path: String, T: Class) -> T {
-        values get(path) as T
+        Registrar deserialize(T, values get(path))
     }
 
     getOption: func <T> (path: String, T: Class, absolute: Bool) -> T {
@@ -34,7 +34,7 @@ FixedEntity: class extends Entity {
                 NoSuchOptionError new(This, "No such option: '%s'" format(path)) throw()
             }
         } else {
-            return values get(path) as T
+            return getValue(path, T)
         }
     }
 }
