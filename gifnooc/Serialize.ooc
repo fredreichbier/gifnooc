@@ -37,8 +37,8 @@ Registrar: class {
         if(!validateValue(T, value)) {
             SerializationError new(This, "The '%s' object at 0x%x could not be validated." format(T name, value as Pointer)) throw()
         }
-        fnc := getEntry(T) serialize as Func(Int) -> Pointer
-        return fnc(value) /* whoa. that is dirty. */
+        fnc := getEntry(T) serialize as Func(Pointer) -> Pointer
+        return fnc(value as Pointer) /* whoa. that is dirty. */
     }
 
     deserialize: static func <T> (T: Class, value: String) -> T {
