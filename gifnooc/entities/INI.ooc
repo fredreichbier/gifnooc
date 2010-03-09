@@ -41,7 +41,7 @@ INIEntity: class extends WriteableEntity {
                 NoSuchOptionError new(This, "No valid contents for '%s' found." format(path)) throw()
             }
         } else if(hasParent()) {
-            return parent getOption(path, T)
+            return parent getOption(path, T, true)
         } else {
             NoSuchOptionError new(This, "No such option: '%s'." format(path)) throw()
         }

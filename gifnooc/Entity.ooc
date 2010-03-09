@@ -1,3 +1,5 @@
+import gifnooc/Errors
+
 Entity: abstract class {
     parent: Entity
     basePath: String = null
@@ -19,6 +21,17 @@ Entity: abstract class {
             } else {
                 return path
             }
+        }
+    }
+
+    getWriteableEntity: func -> WriteableEntity {
+        if(this instanceOf(WriteableEntity)) {
+            return this as WriteableEntity
+        } else if(hasParent()) {
+            return parent getWriteableEntity()
+        } else {
+            NoWriteableEntityError new(This, "Couldn't find a writeable entity for you. Developer's fault.") throw()
+            return null
         }
     }
 }

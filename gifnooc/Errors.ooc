@@ -9,3 +9,9 @@ SerializationError: class extends Exception {
         super(msg)
     }
 }
+
+NoWriteableEntityError: class extends Exception {
+    init: func ~withMsg (.msg) {
+        super(msg)
+    }
+}
