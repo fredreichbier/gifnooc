@@ -18,7 +18,7 @@ OptparseEntity: class extends Entity {
         if(!parser values contains(key)) {
            NoSuchOptionError new(This, "Parser didn't parse anything. Stab your developer!") throw()
         } else {
-            map := parser values get(key, HashMap<String>)
+            map := parser values get(key, HashMap<String, String>)
             if(map contains(path)) {
                 s := map[path]
                 if(Registrar validateString(T, s)) {

@@ -9,7 +9,7 @@ SerializationEntry: class {
 }
 
 Registrar: class {
-    entries: static HashMap<SerializationEntry> = HashMap<SerializationEntry> new()
+    entries: static HashMap<String, SerializationEntry> = HashMap<String, SerializationEntry> new()
 
     _addrToString: static func (ptr: Pointer) -> String {
         str := String new(Pointer size + 1)
@@ -21,14 +21,14 @@ Registrar: class {
     }
 
     addEntry: static func (cls: Class, serialize, deserialize, validateValue, validateString: Func) {
-        entries put(_addrToString(cls),\
+        This entries put(_addrToString(cls),\
             SerializationEntry new(serialize as Pointer, deserialize as Pointer, validateValue as Pointer, validateString as Pointer))
     }
 
     getEntry: static func (cls: Class) -> SerializationEntry {
-        entry := entries get(_addrToString(cls))
+        entry := This entries get(_addrToString(cls))
         if(entry == null) {
-            SerializationError new(This, "No serialization entries found for %s." format(cls name)) throw()
+            SerializationError new(This, "No serialization This entries found for %s." format(cls name)) throw()
         }
         return entry
     }

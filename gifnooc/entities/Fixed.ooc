@@ -3,10 +3,10 @@ import structs/HashMap
 import gifnooc/[Entity, Errors, Serialize]
 
 FixedEntity: class extends Entity {
-    values: HashMap<String>
+    values: HashMap<String, String>
 
     init: func (=parent) {
-        values = HashMap<String> new()
+        values = HashMap<String, String> new()
     }
 
     addValue: func <T> (path: String, value: T) {
