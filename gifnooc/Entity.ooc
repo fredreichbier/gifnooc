@@ -7,7 +7,7 @@ Entity: abstract class {
     hasParent: func -> Bool { parent != null }
 
     getOption: abstract func <T> (path: String, T: Class, absolute: Bool) -> T
-    getOption: func <T> ~relative (path: String, T: Class) -> T {
+    getOption: func ~relative <T> (path: String, T: Class) -> T {
         getOption(path, T, false)
     }
 
