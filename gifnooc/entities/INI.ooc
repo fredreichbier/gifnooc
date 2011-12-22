@@ -15,8 +15,8 @@ INIEntity: class extends WriteableEntity {
     }
 
     _getOptionName: func (path: String, section, key: String*) {
-        tokens := path split('.', 1) toArrayList()
-        if(tokens size() == 2) {
+        tokens := path split('.', 2)
+        if(tokens size == 2) {
             section@ = tokens get(0)
             key@ = tokens get(1)
         } else {

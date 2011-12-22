@@ -27,7 +27,7 @@ FixedEntity: class extends Entity {
 
     getOption: func <T> (path: String, T: Class, absolute: Bool) -> T {
         path = _getPath(path, absolute)
-        if(!values contains(path)) {
+        if(!values contains?(path)) {
             if(hasParent()) {
                 return parent getOption(path, T, true)
             } else {

@@ -25,7 +25,7 @@ Entity: abstract class {
     }
 
     getWriteableEntity: func -> WriteableEntity {
-        if(this instanceOf(WriteableEntity)) {
+        if(this instanceOf?(WriteableEntity)) {
             return this as WriteableEntity
         } else if(hasParent()) {
             return parent getWriteableEntity()
